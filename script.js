@@ -21,7 +21,7 @@ function handleSymbol(symbol){
             break;
         case '=':
             if(previousOperator === null){
-                return
+                return;
             }
             flushOperation(parseInt(buffer));
             previousOperator = null;
@@ -29,17 +29,25 @@ function handleSymbol(symbol){
             runningTotal = 0;
             break;
         case '←':
-            if(buffer.length ===1){
+            if(buffer.length === 1){
                 buffer = '0';
             }else{
                 buffer = buffer.substring(0, buffer.length - 1);
             }
             break;
-        case'+':
+        case '+':
+            hadnleMath('+');
+            break;
         case '-':
+        case '−':
+            hadnleMath('-');
+            break;
         case 'x':
+        case '×': // HTML &times; karakteri eklendi
+            hadnleMath('x');
+            break;
         case '÷':
-            hadnleMath(symbol);
+            hadnleMath('÷');
             break;
     }
 }
